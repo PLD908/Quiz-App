@@ -67,7 +67,7 @@ function displayQuestion() {
 }
 
 function checkAnswer() {
-    const selectedOption = document.querySelector('input[name="quiz"]):checked');
+    const selectedOption = document.querySelector('input[name="quiz"]:checked');
     if(selectedOption) {
         const answer = selectedOption.value;
         if(answer === questionBank[currentQuestion].answer) {
@@ -115,9 +115,9 @@ function showAnswer() {
     retryButton.style.display = "inline-block";
     showAnswerButton.style.display = "none";
 
-    let incorrectAnswerHTML = "";
+    let incorrectAnswersHTML = "";
     for (let i = 0; i < incorrectAnswers.length; i++) {
-        incorrectAnswerHTML += `
+        incorrectAnswersHTML += `
         <p>
         <strong> Question:</strong> ${incorrectAnswers[i].question}<br>
         <strong>Your Answer:</strong> ${incorrectAnswers[i].incorrectAnswer}<br>
@@ -125,6 +125,12 @@ function showAnswer() {
         </p>
         `;
     }
+
+    resultContainer.innerHTML = `
+    <p>You scored ${score} out of ${questionBank.length}!</p>
+    <p>Incorrect Answers:</p>
+    ${incorrectAnswersHTML}
+    `;
 }
 submitButton.addEventListener("click", checkAnswer);
 retryButton.addEventListener("click", retryQuiz);
